@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:social_app/core/controllers/bloc/states.dart';
 import 'package:social_app/models/message_model.dart';
 import 'package:social_app/models/post_model.dart';
 import 'package:social_app/network/local/cache_helper.dart';
@@ -11,12 +12,12 @@ import 'package:social_app/pages/chats/chats_screen.dart';
 import 'package:social_app/pages/feeds/feeds_screen.dart';
 import 'package:social_app/pages/new_post/new_post_screen.dart';
 import 'package:social_app/pages/users/users_screen.dart';
-import 'package:social_app/shared/bloc/states.dart';
-import 'package:social_app/shared/components/components.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import '../../models/user_model.dart';
-import '../../pages/profile/profile_screen.dart';
-import '../constants/constants.dart';
+import '../../../models/user_model.dart';
+import '../../../pages/profile/profile_screen.dart';
+import '../../components/components.dart';
+import '../../constants/constants.dart';
+
 
 class SocialCubit extends Cubit<SocialStates> {
   SocialCubit() : super(SocialInitialState());
@@ -26,10 +27,10 @@ class SocialCubit extends Cubit<SocialStates> {
 
   List<Widget> screens = [
     FeedsScreen(),
-    ChatsScreen(),
+    const ChatsScreen(),
     NewPostScreen(),
-    UsersScreen(),
-    ProfileScreen(),
+    const UsersScreen(),
+    const ProfileScreen(),
   ];
 
 //appBar titles
@@ -65,7 +66,7 @@ class SocialCubit extends Cubit<SocialStates> {
   }
 
   //set mode
-  //method to get shared pref data to see the latest mode and apply it
+  //method to get core pref data to see the latest mode and apply it
   void setMode({required bool? fromShared}) {
     if (fromShared != null) {
       isDark = fromShared;
@@ -180,7 +181,7 @@ class SocialCubit extends Cubit<SocialStates> {
       uploadCoverImage();
       //emit(SocialGetCoverImageSuccessState());
     } else {
-      print('No Image Selected');
+      //print('No Image Selected');
       emit(SocialGetCoverImageErrorState());
     }
   }
@@ -281,7 +282,7 @@ class SocialCubit extends Cubit<SocialStates> {
         emit(SocialUpdateUserDataErrorState());
       });
     } else {
-      FirebaseAuth.instance.currentUser?.updateEmail(email).then((value) {
+      FirebaseAuth.instance.currentUser?.verifyBeforeUpdateEmail(email).then((value) {
         FirebaseFirestore.instance
             .collection('users')
             .doc(userModel?.uId)
@@ -293,7 +294,7 @@ class SocialCubit extends Cubit<SocialStates> {
           emit(SocialUpdateUserDataErrorState());
         });
       }).catchError((error) {
-        print(error.toString());
+        //print(error.toString());
       });
     }
   }
@@ -376,7 +377,8 @@ class SocialCubit extends Cubit<SocialStates> {
   List<PostModel> userPosts = [];
   List<String> postsIds = [];
   List<int> postsLikes = [];
-  var list ;
+  var list;
+
   Future getPosts() async {
     emit(SocialGetPostsLoadingState());
     return FirebaseFirestore.instance
@@ -384,15 +386,12 @@ class SocialCubit extends Cubit<SocialStates> {
         .orderBy('dateTime')
         .snapshots()
         .listen((value) async {
-
       posts = [];
       postsLikes = [];
       postsIds = [];
       userPosts = [];
       for (var element in value.docs) {
-
         element.reference.collection('likes').snapshots().listen((value) {
-
           postsLikes.add(value.docs
               .map((element) => element.data().containsValue(true))
               .toList()
@@ -404,19 +403,17 @@ class SocialCubit extends Cubit<SocialStates> {
           }
           userModel?.noOfPosts = userPosts.length;
         });
-
       }
       emit(SocialGetPostsSuccessState());
     });
   }
 
 //we need to update post data if the person who posts changes his name or profileImage
-  void updatePost(
-      {
-        required String postId,
-        required String text,
-        required String dateTime,
-        String? postImage,
+  void updatePost({
+    required String postId,
+    required String text,
+    required String dateTime,
+    String? postImage,
   }) {
     emit(SocialUpdatePostLoadingState());
     PostModel model = PostModel(
@@ -430,12 +427,12 @@ class SocialCubit extends Cubit<SocialStates> {
     FirebaseFirestore.instance
         .collection('posts')
         .doc(postId)
-        .update(model.toMap()).then((value) {
+        .update(model.toMap())
+        .then((value) {
       emit(SocialUpdatePostSuccessState());
     }).catchError((error) {
       emit(SocialUpdatePostErrorState());
     });
-
   }
 
 //delete post method
@@ -443,14 +440,13 @@ class SocialCubit extends Cubit<SocialStates> {
     FirebaseFirestore.instance
         .collection('posts')
         .doc(postId)
-        .delete().then((value) {
+        .delete()
+        .then((value) {
       emit(SocialDeletePostsSuccessState());
     }).catchError((error) {
       emit(SocialDeletePostsErrorState());
     });
-
   }
-
 
 //like post or dislike post
   Future<void> likePost({
@@ -460,44 +456,35 @@ class SocialCubit extends Cubit<SocialStates> {
   }) async {
     bool? isLike;
     FirebaseFirestore.instance
-         .collection('posts')
-         .doc(postId)
-         .collection('likes')
-         .doc(userID)
-         .get()
-         .then((value) {
-
-           isLike = value.data()?['like'];
-           likeColor(postId: postId, userID: userID, isLike: !(isLike!));
-           FirebaseFirestore.instance
-               .collection('posts')
-               .doc(postId)
-               .collection('likes')
-               .doc(userID)
-               .set({
-             'like':  !(isLike!),
-             'userName': userModel?.name,
-           }).then((value) {
-
-             emit(SocialPostLikeSuccessState());
-           }).catchError((error) {
-             emit(SocialPostLikeErrorState());
-           });
-
-
-
+        .collection('posts')
+        .doc(postId)
+        .collection('likes')
+        .doc(userID)
+        .get()
+        .then((value) {
+      isLike = value.data()?['like'];
+      likeColor(postId: postId, userID: userID, isLike: !(isLike!));
+      FirebaseFirestore.instance
+          .collection('posts')
+          .doc(postId)
+          .collection('likes')
+          .doc(userID)
+          .set({
+        'like': !(isLike!),
+        'userName': userModel?.name,
+      }).then((value) {
+        emit(SocialPostLikeSuccessState());
+      }).catchError((error) {
+        emit(SocialPostLikeErrorState());
+      });
     });
-
-
   }
 
-
-
   Color likeColor(
-      {required String postId, required String userID , required bool isLike}) {
+      {required String postId, required String userID, required bool isLike}) {
     Color color = Colors.grey;
     bool? like;
-    if(isLike){
+    if (isLike) {
       color = Colors.red;
     } else {
       FirebaseFirestore.instance
@@ -517,7 +504,6 @@ class SocialCubit extends Cubit<SocialStates> {
         }
       });
     }
-
 
     return color;
   }
@@ -624,13 +610,12 @@ class SocialCubit extends Cubit<SocialStates> {
         .collection('chats')
         .doc(receiverId)
         .collection('messages')
-        .doc()  // need this
+        .doc() // need this
         .delete()
         .then((value) {
       emit(SocialDeleteMessageSuccessState());
-      }).catchError((error){
+    }).catchError((error) {
       emit(SocialDeleteMessageErrorState());
     });
-
   }
 }

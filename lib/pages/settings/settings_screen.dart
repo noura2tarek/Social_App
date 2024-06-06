@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/Styles/colors.dart';
-import 'package:social_app/shared/components/components.dart';
-import '../../shared/bloc/cubit.dart';
-import '../../shared/bloc/states.dart';
-import '../../styles/icon_broken.dart';
+import '../../core/components/components.dart';
+import '../../core/controllers/bloc/cubit.dart';
+import '../../core/controllers/bloc/states.dart';
+import '../../core/styles/icon_broken.dart';
 import '../login/login_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
-   SettingsScreen({Key? key}) : super(key: key);
-
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +29,16 @@ class SettingsScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10.0),
                     child: Container(
-                      padding: EdgeInsetsDirectional.symmetric(vertical: 15.0, horizontal: 15.0),
+                      padding: const EdgeInsetsDirectional.symmetric(
+                          vertical: 15.0, horizontal: 15.0),
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: SocialCubit.get(context).isDark? Colors.white38 : Colors.grey[700]!,
+                          color: SocialCubit.get(context).isDark
+                              ? Colors.white38
+                              : Colors.grey[700]!,
                         ),
-                        borderRadius: BorderRadiusDirectional.all(Radius.circular(15.0)),
+                        borderRadius:
+                            const BorderRadiusDirectional.all(Radius.circular(15.0)),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,14 +50,20 @@ class SettingsScreen extends StatelessWidget {
                               Icon(
                                 Icons.brightness_2_outlined,
                                 size: 24.0,
-                                color: SocialCubit.get(context).isDark? Colors.grey[350] :Colors.black87, //change color here according the theme
+                                color: SocialCubit.get(context).isDark
+                                    ? Colors.grey[350]
+                                    : Colors
+                                        .black87, //change color here according the theme
                               ),
                               const SizedBox(width: 7.0),
                               Text(
                                 'Dark Mode',
                                 style: TextStyle(
                                   fontSize: 15.0,
-                                  color: SocialCubit.get(context).isDark? Colors.grey[350] :Colors.black87, // change color here according to theme mode
+                                  color: SocialCubit.get(context).isDark
+                                      ? Colors.grey[350]
+                                      : Colors
+                                          .black87, // change color here according to theme mode
                                 ),
                               ),
                               const Spacer(),
@@ -70,22 +79,28 @@ class SettingsScreen extends StatelessWidget {
                           ),
                           /********      change language button    **********/
                           InkWell(
-                            onTap: (){},
+                            onTap: () {},
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
                               child: Row(
                                 // mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(
                                     Icons.language_outlined,
                                     size: 24.0,
-                                    color:  SocialCubit.get(context).isDark? Colors.grey[350] :Colors.black87, //change color here according to theme
+                                    color: SocialCubit.get(context).isDark
+                                        ? Colors.grey[350]
+                                        : Colors
+                                            .black87, //change color here according to theme
                                   ),
                                   const SizedBox(width: 7.0),
                                   Text(
                                     'Language',
                                     style: TextStyle(
-                                      color:  SocialCubit.get(context).isDark? Colors.grey[350] :Colors.black87,
+                                      color: SocialCubit.get(context).isDark
+                                          ? Colors.grey[350]
+                                          : Colors.black87,
                                       // change color here according to theme mode
                                       fontSize: 15.0,
                                     ),
@@ -102,18 +117,21 @@ class SettingsScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10.0),
                     child: InkWell(
-                      borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                      onTap: (){
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(15.0)),
+                      onTap: () {
                         SocialCubit.get(context)
                             .logOut(context: context, widget: LoginScreen());
                       },
                       child: Container(
-                        padding: EdgeInsetsDirectional.symmetric(vertical: 11.0, horizontal: 15.0),
+                        padding: const EdgeInsetsDirectional.symmetric(
+                            vertical: 11.0, horizontal: 15.0),
                         decoration: BoxDecoration(
                           border: Border.all(
                             color: Colors.white38,
                           ),
-                          borderRadius: BorderRadiusDirectional.all(Radius.circular(15.0)),
+                          borderRadius: const BorderRadiusDirectional.all(
+                              Radius.circular(15.0)),
                         ),
                         child: Row(
                           //mainAxisAlignment: MainAxisAlignment.center,
@@ -121,13 +139,18 @@ class SettingsScreen extends StatelessWidget {
                             Icon(
                               IconBroken.Logout,
                               size: 24.0,
-                              color:  SocialCubit.get(context).isDark? Colors.grey[350] :Colors.black87, //change color here according to theme
+                              color: SocialCubit.get(context).isDark
+                                  ? Colors.grey[350]
+                                  : Colors
+                                      .black87, //change color here according to theme
                             ),
                             const SizedBox(width: 7.0),
                             Text(
                               'Log out',
                               style: TextStyle(
-                                color:  SocialCubit.get(context).isDark? Colors.grey[350] :Colors.black87,
+                                color: SocialCubit.get(context).isDark
+                                    ? Colors.grey[350]
+                                    : Colors.black87,
                                 // cange color here according to theme mode
                                 fontSize: 15.0,
                               ),
@@ -137,14 +160,12 @@ class SettingsScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),
           ),
         );
       },
-
     );
   }
 }

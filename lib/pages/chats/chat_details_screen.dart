@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/Styles/colors.dart';
 import 'package:social_app/models/message_model.dart';
-import 'package:social_app/visit_profile/visit_profile_cubit/visit_profile_cubit.dart';
-import 'package:social_app/visit_profile/visit_profile_screen.dart';
-import 'package:social_app/shared/bloc/cubit.dart';
-import 'package:social_app/shared/bloc/states.dart';
-import 'package:social_app/styles/icon_broken.dart';
+import '../../core/components/components.dart';
+import '../../core/controllers/bloc/cubit.dart';
+import '../../core/controllers/bloc/states.dart';
+import '../../core/controllers/visit_profile_cubit/visit_profile_cubit.dart';
+import '../../core/styles/icon_broken.dart';
 import '../../models/user_model.dart';
-import '../../shared/components/components.dart';
+import '../visit_profile/visit_profile_screen.dart';
 
 class ChatDetailsScreen extends StatelessWidget {
   final UserModel? receiverModel;
@@ -73,7 +73,7 @@ class ChatDetailsScreen extends StatelessWidget {
                 actions: [
                   IconButton(
                     onPressed: () {},
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.more_horiz_sharp,
                       size: 22.0,
                     ),
@@ -117,7 +117,7 @@ class ChatDetailsScreen extends StatelessWidget {
                             border: Border.all(
                               color: Colors.grey,
                             ),
-                            borderRadius: BorderRadiusDirectional.all(
+                            borderRadius: const BorderRadiusDirectional.all(
                                 Radius.circular(20.0)),
                           ),
                           child: Row(
@@ -127,12 +127,16 @@ class ChatDetailsScreen extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 15.0),
                                   child: TextFormField(
-                                    style: Theme.of(context).inputDecorationTheme.hintStyle,
+                                    style: Theme.of(context)
+                                        .inputDecorationTheme
+                                        .hintStyle,
                                     controller: messageController,
                                     keyboardType: TextInputType.text,
                                     decoration: InputDecoration(
                                       hintText: 'Write a message...',
-                                      hintStyle: Theme.of(context).inputDecorationTheme.hintStyle,
+                                      hintStyle: Theme.of(context)
+                                          .inputDecorationTheme
+                                          .hintStyle,
                                       border: InputBorder.none,
                                     ),
                                   ),
@@ -145,7 +149,7 @@ class ChatDetailsScreen extends StatelessWidget {
                                       dataTime: Timestamp.now(),
                                       receiverId: receiverModel!.uId!);
                                 },
-                                icon: Icon(
+                                icon: const Icon(
                                   IconBroken.Image,
                                   color: Colors.blue,
                                 ),
@@ -161,7 +165,7 @@ class ChatDetailsScreen extends StatelessWidget {
                                     );
                                   }
                                 },
-                                icon: Icon(
+                                icon: const Icon(
                                   IconBroken.Send,
                                   color: Colors.blue,
                                 ),
@@ -203,13 +207,13 @@ class ChatDetailsScreen extends StatelessWidget {
                   topEnd: Radius.circular(10.0),
                 ),
               ),
-              padding: EdgeInsetsDirectional.symmetric(
+              padding: const EdgeInsetsDirectional.symmetric(
                 vertical: 5.0,
                 horizontal: 10.0,
               ),
               child: Text(
                 messageModel.text,
-                style:  TextStyle(
+                style: const TextStyle(
                   fontSize: 15.0,
                   color: Colors.white,
                 ),
@@ -259,19 +263,19 @@ class ChatDetailsScreen extends StatelessWidget {
               clipBehavior: Clip.antiAliasWithSaveLayer,
               decoration: BoxDecoration(
                 color: defaultColor.withOpacity(0.7),
-                borderRadius: BorderRadiusDirectional.only(
+                borderRadius: const BorderRadiusDirectional.only(
                   bottomStart: Radius.circular(10.0),
                   topStart: Radius.circular(10.0),
                   topEnd: Radius.circular(10.0),
                 ),
               ),
-              padding: EdgeInsetsDirectional.symmetric(
+              padding: const EdgeInsetsDirectional.symmetric(
                 vertical: 5.0,
                 horizontal: 10.0,
               ),
               child: Text(
                 model.text,
-                style: TextStyle(color: Colors.white, fontSize: 15.0),
+                style: const TextStyle(color: Colors.white, fontSize: 15.0),
               ),
             ),
           ),
@@ -318,17 +322,17 @@ class ChatDetailsScreen extends StatelessWidget {
         style: TextStyle(color: defaultColor),
       ),
     );
-    Widget DeleteForEveryoneButton = TextButton(
+    Widget deleteForEveryoneButton = TextButton(
       onPressed: () {
         // Appcubit.get(context).deleteFromMydatabase(id: taskModel['id']);
         Navigator.of(context).pop(true);
       },
-      child: Text(
+      child: const Text(
         'Delete for everyone',
         style: TextStyle(color: defaultColor),
       ),
     );
-    Widget DeleteForMeButton = TextButton(
+    Widget deleteForMeButton = TextButton(
       onPressed: () {
         // Appcubit.get(context).deleteFromMydatabase(id: taskModel['id']);
         Navigator.of(context).pop(true);
@@ -343,23 +347,27 @@ class ChatDetailsScreen extends StatelessWidget {
 
     // Set up the alert dialog
     AlertDialog alert = AlertDialog(
-      backgroundColor: SocialCubit.get(context).isDark? Colors.grey[700] : Colors.white ,
-      surfaceTintColor: SocialCubit.get(context).isDark? Colors.grey[700] : Colors.white ,
+      backgroundColor:
+          SocialCubit.get(context).isDark ? Colors.grey[700] : Colors.white,
+      surfaceTintColor:
+          SocialCubit.get(context).isDark ? Colors.grey[700] : Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
-      title:  Text(
+      title: Text(
         'Delete message?',
         style: TextStyle(
           fontWeight: FontWeight.normal,
           fontSize: 16.0,
-          color: SocialCubit.get(context).isDark? Colors.grey[700] : Colors.white , //change color according to theme
+          color: SocialCubit.get(context).isDark
+              ? Colors.grey[700]
+              : Colors.white, //change color according to theme
         ),
       ),
       actions: [
         cancelButton,
-        DeleteForEveryoneButton,
-        DeleteForMeButton,
+        deleteForEveryoneButton,
+        deleteForMeButton,
       ],
     );
     showDialog(
@@ -385,7 +393,6 @@ class ChatDetailsScreen extends StatelessWidget {
     );
     Widget DeleteForMeButton = TextButton(
       onPressed: () {
-
         Navigator.of(context).pop(true);
       },
       child: const Text(
@@ -398,17 +405,21 @@ class ChatDetailsScreen extends StatelessWidget {
 
     // Set up the alert dialog
     AlertDialog alert = AlertDialog(
-      backgroundColor: SocialCubit.get(context).isDark? Colors.grey[700] : Colors.white ,
-      surfaceTintColor:SocialCubit.get(context).isDark? Colors.grey[700] : Colors.white ,
+      backgroundColor:
+          SocialCubit.get(context).isDark ? Colors.grey[700] : Colors.white,
+      surfaceTintColor:
+          SocialCubit.get(context).isDark ? Colors.grey[700] : Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
-      title:  Text(
+      title: Text(
         'Delete message?',
         style: TextStyle(
           fontWeight: FontWeight.normal,
           fontSize: 16.0,
-          color: SocialCubit.get(context).isDark? Colors.grey[700] : Colors.white , //change color according to theme
+          color: SocialCubit.get(context).isDark
+              ? Colors.grey[700]
+              : Colors.white, //change color according to theme
         ),
       ),
       actions: [

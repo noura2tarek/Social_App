@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/Styles/colors.dart';
 import 'package:social_app/pages/new_post/new_post_screen.dart';
-import 'package:social_app/shared/bloc/cubit.dart';
-import 'package:social_app/shared/components/components.dart';
-import 'package:social_app/styles/icon_broken.dart';
-import '../../shared/bloc/states.dart';
+import '../../core/components/components.dart';
+import '../../core/controllers/bloc/cubit.dart';
+import '../../core/controllers/bloc/states.dart';
+import '../../core/styles/icon_broken.dart';
 import '../edit_profile/edit_profile_screen.dart';
 import '../settings/settings_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key, this.userVisitId}) : super(key: key);
+  const ProfileScreen({super.key, this.userVisitId});
   final String? userVisitId;
 
   @override
@@ -27,7 +27,7 @@ class ProfileScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Container(
+                  SizedBox(
                     height: 220.0,
                     child: Stack(
                       children: [
@@ -92,9 +92,7 @@ class ProfileScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   '${model.noOfPosts}',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall,
+                                  style: Theme.of(context).textTheme.titleSmall,
                                 ),
                                 Text(
                                   'Posts',
@@ -102,7 +100,9 @@ class ProfileScreen extends StatelessWidget {
                                       .textTheme
                                       .bodySmall
                                       ?.copyWith(
-                                        color: SocialCubit.get(context).isDark? Colors.grey :Colors.black87.withOpacity(0.7),
+                                        color: SocialCubit.get(context).isDark
+                                            ? Colors.grey
+                                            : Colors.black87.withOpacity(0.7),
                                         //change color here according to theme mode
                                         fontSize: 15.0,
                                       ),
@@ -118,9 +118,7 @@ class ProfileScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   '${model.noOfFollowers}',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall,
+                                  style: Theme.of(context).textTheme.titleSmall,
                                 ),
                                 Text(
                                   'Followers',
@@ -128,7 +126,9 @@ class ProfileScreen extends StatelessWidget {
                                       .textTheme
                                       .bodySmall
                                       ?.copyWith(
-                                        color: SocialCubit.get(context).isDark? Colors.grey :Colors.black87.withOpacity(0.7),
+                                        color: SocialCubit.get(context).isDark
+                                            ? Colors.grey
+                                            : Colors.black87.withOpacity(0.7),
                                         fontSize: 15.0,
                                       ),
                                 ),
@@ -143,9 +143,7 @@ class ProfileScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   '${model.noOfFollowing}',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall,
+                                  style: Theme.of(context).textTheme.titleSmall,
                                 ),
                                 Text(
                                   'Following',
@@ -153,7 +151,9 @@ class ProfileScreen extends StatelessWidget {
                                       .textTheme
                                       .bodySmall
                                       ?.copyWith(
-                                        color: SocialCubit.get(context).isDark? Colors.grey :Colors.black87.withOpacity(0.7),
+                                        color: SocialCubit.get(context).isDark
+                                            ? Colors.grey
+                                            : Colors.black87.withOpacity(0.7),
                                         fontSize: 15.0,
                                       ),
                                 ),
@@ -168,9 +168,7 @@ class ProfileScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   '${model.noOfFriends}',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall,
+                                  style: Theme.of(context).textTheme.titleSmall,
                                 ),
                                 Text(
                                   'Friends',
@@ -178,7 +176,9 @@ class ProfileScreen extends StatelessWidget {
                                       .textTheme
                                       .bodySmall
                                       ?.copyWith(
-                                        color: SocialCubit.get(context).isDark? Colors.grey :Colors.black87.withOpacity(0.7),
+                                        color: SocialCubit.get(context).isDark
+                                            ? Colors.grey
+                                            : Colors.black87.withOpacity(0.7),
                                         fontSize: 15.0,
                                       ),
                                 ),
@@ -196,7 +196,7 @@ class ProfileScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: OutlinedButton(
-                            child: Text(
+                            child: const Text(
                               'Add Photo / Post',
                               style: TextStyle(
                                 color: defaultColor,
@@ -225,15 +225,15 @@ class ProfileScreen extends StatelessWidget {
                     onPressed: () {
                       navigateTo(context: context, widget: SettingsScreen());
                     },
-                    child: Row(
+                    child: const Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(IconBroken.Setting),
-                        const SizedBox(
+                        SizedBox(
                           width: 5.0,
                         ),
-                        const Text('Settings'),
+                        Text('Settings'),
                       ],
                     ),
                   ),

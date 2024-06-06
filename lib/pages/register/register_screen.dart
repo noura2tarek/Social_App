@@ -1,16 +1,16 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:social_app/pages/register/register_bloc/register_cubit.dart';
-import 'package:social_app/pages/register/register_bloc/register_states.dart';
-import 'package:social_app/shared/bloc/cubit.dart';
 import '../../Styles/colors.dart';
+import '../../core/components/components.dart';
+import '../../core/controllers/bloc/cubit.dart';
+import '../../core/controllers/register_bloc/register_cubit.dart';
+import '../../core/controllers/register_bloc/register_states.dart';
 import '../../network/local/cache_helper.dart';
-import '../../shared/components/components.dart';
 import '../../layout/home_layout.dart';
 
 class RegisterScreen extends StatelessWidget {
-  RegisterScreen({Key? key}) : super(key: key);
+  RegisterScreen({super.key});
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -34,7 +34,7 @@ class RegisterScreen extends StatelessWidget {
                 SocialCubit.get(context).getPosts().then((value) {
                   navigateAndRemove(
                     context: context,
-                    widget: HomeLayout(),
+                    widget: const HomeLayout(),
                   );
                 });
               });
@@ -77,7 +77,7 @@ class RegisterScreen extends StatelessWidget {
                           type: TextInputType.name,
                           controller: nameController,
                           label: 'Name',
-                          inputBorder: OutlineInputBorder(),
+                          inputBorder: const OutlineInputBorder(),
                           preficon: Icons.person_outline,
                           validator: (String? value) {
                             if (value!.isEmpty) {
@@ -94,7 +94,7 @@ class RegisterScreen extends StatelessWidget {
                           type: TextInputType.emailAddress,
                           controller: emailController,
                           label: 'Email Address',
-                          inputBorder: OutlineInputBorder(),
+                          inputBorder: const OutlineInputBorder(),
                           preficon: Icons.email_outlined,
                           onSubmit: (value) {},
                           validator: (String? value) {
@@ -112,7 +112,7 @@ class RegisterScreen extends StatelessWidget {
                           type: TextInputType.visiblePassword,
                           controller: passwordController,
                           label: 'Password',
-                          inputBorder: OutlineInputBorder(),
+                          inputBorder: const OutlineInputBorder(),
                           preficon: Icons.lock_outline,
                           isObsecure:
                               SocialRegisterCubit.get(context).isPassword,
@@ -136,7 +136,7 @@ class RegisterScreen extends StatelessWidget {
                           type: TextInputType.visiblePassword,
                           controller: confirmPasswordController,
                           label: 'Confirm Password',
-                          inputBorder: OutlineInputBorder(),
+                          inputBorder: const OutlineInputBorder(),
                           preficon: Icons.lock_outline,
                           isObsecure: SocialRegisterCubit.get(context).isCheckPassword,
                           sufficon: SocialRegisterCubit.get(context).confirmIcon,
@@ -161,7 +161,7 @@ class RegisterScreen extends StatelessWidget {
                           type: TextInputType.phone,
                           controller: phoneController,
                           label: 'Phone',
-                          inputBorder: OutlineInputBorder(),
+                          inputBorder: const OutlineInputBorder(),
                           preficon: Icons.phone,
                           validator: (String? value) {
                             if (value!.isEmpty) {
@@ -176,6 +176,7 @@ class RegisterScreen extends StatelessWidget {
                         const SizedBox(
                           height: 30.0,
                         ),
+
                         ConditionalBuilder(
                           condition: state is! SocialRegisterLoadingState,
                           builder: (context) {
@@ -203,6 +204,61 @@ class RegisterScreen extends StatelessWidget {
                         ),
                         const SizedBox(
                           height: 15.0,
+                        ),
+                        /*--------- register with google --------*/
+                        Container(
+                          width: double.infinity,
+                          height: 40.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6.0),
+                          ),
+                          child: OutlinedButton(
+                            child: const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CircleAvatar(
+                                  radius: 15.0,
+                                  backgroundImage: AssetImage(
+                                      'assets/images/google.jpg'),
+                                ),
+                                SizedBox(
+                                  width: 9.0,
+                                ),
+                                Text(
+                                  'Continue with Goggle',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            onPressed: () {
+                              SocialRegisterCubit.get(context).continueWithGoogle();
+                            },
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        /*--------- register with facebook --------*/
+                        Container(
+                          width: double.infinity,
+                          height: 40.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6.0),
+                          ),
+                          child: OutlinedButton.icon(
+                            onPressed: () {
+                              SocialRegisterCubit.get(context).continueInWithFacebook();
+                            },
+                            icon: const Icon(Icons.facebook),
+                            label: const Text(
+                              'Continue with Facebook',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),

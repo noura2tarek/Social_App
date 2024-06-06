@@ -2,16 +2,15 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:social_app/layout/home_layout.dart';
 import 'package:social_app/pages/login/login_screen.dart';
-import 'package:social_app/shared/bloc/cubit.dart';
-import 'package:social_app/shared/bloc/states.dart';
-import 'package:social_app/shared/bloc_observer.dart';
-import 'package:social_app/shared/components/components.dart';
-import 'package:social_app/shared/constants/constants.dart';
-import 'package:social_app/styles/themes.dart';
-import 'package:social_app/visit_profile/visit_profile_cubit/visit_profile_cubit.dart';
+import 'core/bloc_observer.dart';
+import 'core/components/components.dart';
+import 'core/constants/constants.dart';
+import 'core/controllers/bloc/cubit.dart';
+import 'core/controllers/bloc/states.dart';
+import 'core/controllers/visit_profile_cubit/visit_profile_cubit.dart';
+import 'core/styles/themes.dart';
 import 'network/local/cache_helper.dart';
 
 //Handle background message (the app is closed or the app is running in the background)
@@ -23,14 +22,14 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //check internet
-  bool result = await InternetConnectionChecker().hasConnection;
-  if (result == true) {
-    return;
-  } else {
-    showToast(
-        message: 'No Internet Connection, check internet and try again',
-        state: ToastStates.NOTIFY);
-  }
+  // bool result = await InternetConnectionChecker().hasConnection;
+  // if (result == true) {
+  //   return;
+  // } else {
+  //   showToast(
+  //       message: 'No Internet Connection, check internet and try again',
+  //       state: ToastStates.NOTIFY);
+  // }
 
   await Firebase.initializeApp();
   FirebaseMessaging messaging = FirebaseMessaging.instance;

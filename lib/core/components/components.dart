@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:social_app/visit_profile/visit_profile_cubit/visit_profile_cubit.dart';
-import 'package:social_app/visit_profile/visit_profile_screen.dart';
-import 'package:social_app/styles/icon_broken.dart';
-
+import '../../Styles/colors.dart';
 import '../../models/post_model.dart';
-import '../../styles/colors.dart';
-import '../bloc/cubit.dart';
+import '../../pages/visit_profile/visit_profile_screen.dart';
+import '../controllers/bloc/cubit.dart';
+import '../controllers/visit_profile_cubit/visit_profile_cubit.dart';
+import '../styles/icon_broken.dart';
 
 void navigateTo({
   required BuildContext context,
@@ -54,7 +53,7 @@ Widget defaultButton({
         },
         child: Text(
           isUpperCase ? text.toUpperCase() : text,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
           ),
         ),
@@ -69,7 +68,7 @@ Widget defaultTextButton({
         onPressed: function,
         child: Text(
           text.toUpperCase(),
-          style: TextStyle(
+          style: const TextStyle(
             color: defaultColor,
           ),
         ));
@@ -82,7 +81,7 @@ PreferredSizeWidget defaultAppBar({
   return AppBar(
     title: Text(title ?? ''),
     leading: IconButton(
-      icon: Icon(
+      icon: const Icon(
         IconBroken.Arrow___Left_2,
       ),
       onPressed: () {
@@ -116,42 +115,45 @@ Widget defaultFormField({
   bool isObsecure = false,
   void Function()? onTab,
 }) =>
-    TextFormField(
-      style: style,
-      keyboardType: type,
-      controller: controller,
-      validator: validator,
-      obscureText: isObsecure,
-      cursorColor: cursorColor,
-      cursorHeight: cursorHeight,
-      textAlignVertical: TextAlignVertical.center,
-      textAlign: TextAlign.center,
-      decoration: InputDecoration(
-        fillColor: fillColor,
-        labelStyle: TextStyle(
-          color: labelColor,
-        ),
-        border: inputBorder,
-        labelText: label,
-        hintText: hint,
-        hintStyle: TextStyle(
-          color: hintColor,
-        ),
-        prefixIcon: Icon(
-          preficon,
-          color: prefixColor,
-          size: prefixIconSize,
-        ),
-        suffixIcon: IconButton(
-          icon: Icon(
-            sufficon,
+    SizedBox(
+      height: 55.0,
+      child: TextFormField(
+        style: style,
+        keyboardType: type,
+        controller: controller,
+        validator: validator,
+        obscureText: isObsecure,
+        cursorColor: cursorColor,
+        cursorHeight: cursorHeight,
+        textAlignVertical: TextAlignVertical.center,
+        textAlign: TextAlign.center,
+        decoration: InputDecoration(
+          fillColor: fillColor,
+          labelStyle: TextStyle(
+            color: labelColor,
           ),
-          onPressed: suffixPreesed,
+          border: inputBorder,
+          labelText: label,
+          hintText: hint,
+          hintStyle: TextStyle(
+            color: hintColor,
+          ),
+          prefixIcon: Icon(
+            preficon,
+            color: prefixColor,
+            size: prefixIconSize,
+          ),
+          suffixIcon: IconButton(
+            icon: Icon(
+              sufficon,
+            ),
+            onPressed: suffixPreesed,
+          ),
         ),
+        onTap: onTab,
+        onFieldSubmitted: onSubmit,
+        onChanged: onChange,
       ),
-      onTap: onTab,
-      onFieldSubmitted: onSubmit,
-      onChanged: onChange,
     );
 
 void showToast({
@@ -199,12 +201,11 @@ Widget myDivider() {
   );
 }
 
-
-Widget buildPostItem(
-    {required PostModel model,
-    required BuildContext context,
-    required int index,
-    }) {
+Widget buildPostItem({
+  required PostModel model,
+  required BuildContext context,
+  required int index,
+}) {
   return Card(
     clipBehavior: Clip.antiAliasWithSaveLayer,
     margin: const EdgeInsetsDirectional.symmetric(horizontal: 10.0),
@@ -221,7 +222,8 @@ Widget buildPostItem(
                   VisitCubit.get(context)
                       .getUserVisitData(userId: model.uId)
                       .then((value) {
-                    navigateTo(context: context, widget: VisitProfileScreen());
+                    navigateTo(
+                        context: context, widget: const VisitProfileScreen());
                   });
                 },
                 child: CircleAvatar(
@@ -242,7 +244,10 @@ Widget buildPostItem(
                         style: TextStyle(
                           fontSize: 16.0,
                           height: 1.6,
-                          color: SocialCubit.get(context).isDark? Colors.white : Colors.black, // change color here according to theme mode.
+                          color: SocialCubit.get(context).isDark
+                              ? Colors.white
+                              : Colors
+                                  .black, // change color here according to theme mode.
                         ),
                       ),
                       const SizedBox(
@@ -253,13 +258,12 @@ Widget buildPostItem(
                         color: defaultColor,
                         size: 16.0,
                       ),
-
                     ],
                   ),
                   Text(
                     model.dateTime,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      //change color here according to theme
+                          //change color here according to theme
                           height: 1.5,
                         ),
                   ),
@@ -271,7 +275,10 @@ Widget buildPostItem(
                 icon: Icon(
                   Icons.more_horiz_sharp,
                   size: 22.0,
-                  color:  SocialCubit.get(context).isDark? Colors.grey[350] : Colors.black, // change color here according to theme mode
+                  color: SocialCubit.get(context).isDark
+                      ? Colors.grey[350]
+                      : Colors
+                          .black, // change color here according to theme mode
                 ),
               ),
             ],
@@ -371,7 +378,7 @@ Widget buildPostItem(
                     Expanded(
                       child: Row(
                         children: [
-                          Icon(
+                          const Icon(
                             IconBroken.Heart,
                             color: Colors.red,
                             size: 18.0,
@@ -380,9 +387,7 @@ Widget buildPostItem(
                           Expanded(
                             child: Text(
                               '${SocialCubit.get(context).postsLikes[index]}',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall,
+                              style: Theme.of(context).textTheme.bodySmall,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -392,7 +397,7 @@ Widget buildPostItem(
                     ),
                     Row(
                       children: [
-                        Icon(
+                        const Icon(
                           IconBroken.Chat,
                           color: Colors.amber,
                           size: 18.0,
@@ -400,8 +405,7 @@ Widget buildPostItem(
                         const SizedBox(width: 4.0),
                         Text(
                           '0 comments',
-                            style:
-                                Theme.of(context).textTheme.bodySmall,
+                          style: Theme.of(context).textTheme.bodySmall,
                         ), // caption style replaced by bodySmall
                       ],
                     ),
@@ -416,8 +420,7 @@ Widget buildPostItem(
                         ),
                         Text(
                           '0 shares',
-                          style:
-                              Theme.of(context).textTheme.bodySmall,
+                          style: Theme.of(context).textTheme.bodySmall,
                         ), // caption style replaced by bodySmall
                       ],
                     ),
@@ -428,7 +431,7 @@ Widget buildPostItem(
           ),
           // InkWell of Row of likes, comments, and shares
           Divider(
-            color:  Theme.of(context).dividerTheme.color,
+            color: Theme.of(context).dividerTheme.color,
           ),
           Row(
             children: [
@@ -456,11 +459,10 @@ Widget buildPostItem(
               ),
               InkWell(
                 onTap: () {
-                  SocialCubit.get(context)
-                      .likePost(
-                          postId: SocialCubit.get(context).postsIds[index],
-                          index: index,
-                          userID: SocialCubit.get(context).userModel!.uId!);
+                  SocialCubit.get(context).likePost(
+                      postId: SocialCubit.get(context).postsIds[index],
+                      index: index,
+                      userID: SocialCubit.get(context).userModel!.uId!);
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 7.0),
@@ -468,14 +470,16 @@ Widget buildPostItem(
                     children: [
                       Icon(
                         IconBroken.Heart,
-                        color:  SocialCubit.get(context).likeColor(postId: SocialCubit.get(context).postsIds[index], userID: SocialCubit.get(context).userModel!.uId!, isLike: false),
+                        color: SocialCubit.get(context).likeColor(
+                            postId: SocialCubit.get(context).postsIds[index],
+                            userID: SocialCubit.get(context).userModel!.uId!,
+                            isLike: false),
                         size: 18.0,
                       ),
                       const SizedBox(width: 6.0),
                       Text(
                         'Like',
-                          style:
-                              Theme.of(context).textTheme.bodySmall,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ), // caption style replaced by bodySmall
                     ],
                   ),
@@ -490,7 +494,7 @@ Widget buildPostItem(
                   padding: const EdgeInsets.symmetric(vertical: 7.0),
                   child: Row(
                     children: [
-                      Icon(
+                      const Icon(
                         IconBroken.Upload,
                         color: Colors.green,
                         size: 18.0,
@@ -511,5 +515,3 @@ Widget buildPostItem(
     ),
   );
 }
-
-

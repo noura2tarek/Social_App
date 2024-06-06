@@ -1,14 +1,14 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:social_app/shared/bloc/cubit.dart';
-import 'package:social_app/shared/bloc/states.dart';
-import 'package:social_app/styles/icon_broken.dart';
+import '../../core/components/components.dart';
+import '../../core/controllers/bloc/cubit.dart';
+import '../../core/controllers/bloc/states.dart';
+import '../../core/styles/icon_broken.dart';
 
-import '../../shared/components/components.dart';
 
 class FeedsScreen extends StatelessWidget {
-  FeedsScreen({Key? key}) : super(key: key);
+  FeedsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

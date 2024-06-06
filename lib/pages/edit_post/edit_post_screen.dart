@@ -2,14 +2,14 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/Styles/colors.dart';
-import 'package:social_app/shared/bloc/cubit.dart';
-import 'package:social_app/shared/bloc/states.dart';
-import 'package:social_app/styles/icon_broken.dart';
+import '../../core/components/components.dart';
+import '../../core/controllers/bloc/cubit.dart';
+import '../../core/controllers/bloc/states.dart';
+import '../../core/styles/icon_broken.dart';
 
-import '../../shared/components/components.dart';
 
 class EditPostScreen extends StatelessWidget {
-  EditPostScreen({Key? key}) : super(key: key);
+  EditPostScreen({super.key});
   final textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -108,7 +108,7 @@ class EditPostScreen extends StatelessWidget {
                                   cubit.removePostImage();
                                 },
                                 splashRadius: 21.0,
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.close,
                                   color: Colors.white,
                                   size: 20.0,

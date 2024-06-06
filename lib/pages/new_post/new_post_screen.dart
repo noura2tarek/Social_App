@@ -2,15 +2,15 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/Styles/colors.dart';
-import 'package:social_app/shared/bloc/cubit.dart';
-import 'package:social_app/shared/bloc/states.dart';
-import 'package:social_app/styles/icon_broken.dart';
-
-import '../../shared/components/components.dart';
+import '../../core/components/components.dart';
+import '../../core/controllers/bloc/cubit.dart';
+import '../../core/controllers/bloc/states.dart';
+import '../../core/styles/icon_broken.dart';
 
 class NewPostScreen extends StatelessWidget {
-   NewPostScreen({Key? key}) : super(key: key);
+  NewPostScreen({super.key});
   final textController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SocialCubit, SocialStates>(
@@ -27,18 +27,27 @@ class NewPostScreen extends StatelessWidget {
                 context: context,
                 title: 'Create Post',
                 actions: [
-                  defaultTextButton(text: 'Post', function: () {
-                    if(cubit.postImage == null ) {
-                      cubit.createPost(text: textController.text, dateTime: now.toString()).then((value) {
-                        Navigator.pop(context);
-                      });
-                    } else{
-                      cubit.uploadPostImage(text: textController.text, dateTime: now.toString()).then((value) {
-                        Navigator.pop(context);
-                      });
-                    }
-
-                  }),
+                  defaultTextButton(
+                      text: 'Post',
+                      function: () {
+                        if (cubit.postImage == null) {
+                          cubit
+                              .createPost(
+                                  text: textController.text,
+                                  dateTime: now.toString())
+                              .then((value) {
+                            Navigator.pop(context);
+                          });
+                        } else {
+                          cubit
+                              .uploadPostImage(
+                                  text: textController.text,
+                                  dateTime: now.toString())
+                              .then((value) {
+                            Navigator.pop(context);
+                          });
+                        }
+                      }),
                 ],
               ),
               body: Padding(
@@ -67,7 +76,10 @@ class NewPostScreen extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 16.0,
                             height: 1.6,
-                            color: SocialCubit.get(context).isDark? Colors.white :Colors.black, //change color here according to theme mode
+                            color: SocialCubit.get(context).isDark
+                                ? Colors.white
+                                : Colors
+                                    .black, //change color here according to theme mode
                           ),
                         ),
                       ],
@@ -78,12 +90,13 @@ class NewPostScreen extends StatelessWidget {
                         controller: textController,
                         decoration: InputDecoration(
                           hintText: 'what is in your mind...',
-                          hintStyle: Theme.of(context).inputDecorationTheme.hintStyle,
+                          hintStyle:
+                              Theme.of(context).inputDecorationTheme.hintStyle,
                           border: InputBorder.none,
                         ),
                       ),
                     ),
-                    if(SocialCubit.get(context).postImage != null)
+                    if (SocialCubit.get(context).postImage != null)
                       Stack(
                         alignment: AlignmentDirectional.topEnd,
                         children: [
@@ -98,8 +111,8 @@ class NewPostScreen extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(
-                                top: 8.0, right: 8.0),
+                            padding:
+                                const EdgeInsets.only(top: 8.0, right: 8.0),
                             child: CircleAvatar(
                               backgroundColor: defaultColor,
                               radius: 17.0,
@@ -122,7 +135,7 @@ class NewPostScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: TextButton(
-                            onPressed: (){
+                            onPressed: () {
                               cubit.getPostImage();
                             },
                             child: const Row(
@@ -131,18 +144,17 @@ class NewPostScreen extends StatelessWidget {
                                 Icon(
                                   IconBroken.Image,
                                 ),
-                                SizedBox(width: 5.0,),
+                                SizedBox(
+                                  width: 5.0,
+                                ),
                                 Text('Add Photo'),
                               ],
                             ),
                           ),
                         ),
-
                         Expanded(
-                          child: defaultTextButton(
-                              text: '#tags',
-                              function: (){}
-                          ),
+                          child:
+                              defaultTextButton(text: '#tags', function: () {}),
                         ),
                       ],
                     ),
@@ -154,7 +166,6 @@ class NewPostScreen extends StatelessWidget {
           fallback: (context) {
             return Scaffold(
               appBar: AppBar(),
-
             );
           },
         );

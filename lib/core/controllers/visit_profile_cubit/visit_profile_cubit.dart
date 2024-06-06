@@ -1,10 +1,9 @@
-import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social_app/core/controllers/visit_profile_cubit/visit_profile_states.dart';
 import 'package:social_app/models/user_model.dart';
-import 'package:social_app/visit_profile/visit_profile_cubit/visit_profile_states.dart';
+import '../../../models/post_model.dart';
 
-import '../../models/post_model.dart';
 
 class VisitCubit extends Cubit<VisitStates>{
   VisitCubit() :super (VisitInitialState());

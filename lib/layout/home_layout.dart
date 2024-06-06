@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/pages/new_post/new_post_screen.dart';
-import 'package:social_app/shared/bloc/cubit.dart';
-import 'package:social_app/shared/bloc/states.dart';
-import 'package:social_app/shared/components/components.dart';
-import 'package:social_app/styles/icon_broken.dart';
-
-import '../shared/constants/constants.dart';
+import '../core/components/components.dart';
+import '../core/constants/constants.dart';
+import '../core/controllers/bloc/cubit.dart';
+import '../core/controllers/bloc/states.dart';
+import '../core/styles/icon_broken.dart';
 class HomeLayout extends StatelessWidget {
-  const HomeLayout({Key? key}) : super(key: key);
+  const HomeLayout({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,7 @@ class HomeLayout extends StatelessWidget {
             actions: [
               IconButton(
                   onPressed: () {},
-                  icon: Icon(IconBroken.Notification),
+                  icon: const Icon(IconBroken.Notification),
               ),
               IconButton(
                   onPressed: () {},
@@ -43,7 +42,7 @@ class HomeLayout extends StatelessWidget {
           body: cubit.screens[savedCurrentIndex],
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: savedCurrentIndex,
-            items: [
+            items: const [
               BottomNavigationBarItem(
                 icon: Icon(
                   IconBroken.Home,

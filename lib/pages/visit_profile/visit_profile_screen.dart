@@ -1,13 +1,15 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:social_app/visit_profile/visit_profile_cubit/visit_profile_cubit.dart';
-import 'package:social_app/visit_profile/visit_profile_cubit/visit_profile_states.dart';
-import '../shared/components/components.dart';
-import '../styles/icon_broken.dart';
+import '../../core/components/components.dart';
+import '../../core/controllers/visit_profile_cubit/visit_profile_cubit.dart';
+import '../../core/controllers/visit_profile_cubit/visit_profile_states.dart';
+import '../../core/styles/icon_broken.dart';
+
+
 
 class VisitProfileScreen extends StatelessWidget {
-  const VisitProfileScreen({Key? key}) : super(key: key);
+  const VisitProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

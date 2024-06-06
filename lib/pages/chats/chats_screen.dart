@@ -5,10 +5,10 @@ import 'package:intl/intl.dart';
 import 'package:social_app/models/message_model.dart';
 import 'package:social_app/models/user_model.dart';
 import 'package:social_app/pages/chats/chat_details_screen.dart';
-import 'package:social_app/shared/bloc/cubit.dart';
-import 'package:social_app/shared/bloc/states.dart';
+import '../../core/components/components.dart';
+import '../../core/controllers/bloc/cubit.dart';
+import '../../core/controllers/bloc/states.dart';
 
-import '../../shared/components/components.dart';
 
 class ChatsScreen extends StatelessWidget {
   const ChatsScreen({Key? key}) : super(key: key);
@@ -66,7 +66,7 @@ class ChatsScreen extends StatelessWidget {
                 ? Colors.grey[600]
                 : Colors.grey[200],
             //200 for light and grey[500] for dark
-            borderRadius: BorderRadiusDirectional.all(Radius.circular(8.0)),
+            borderRadius: const BorderRadiusDirectional.all(Radius.circular(8.0)),
           ),
           child: Padding(
             padding: const EdgeInsets.all(14.0),
@@ -105,6 +105,7 @@ class ChatsScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Expanded(
+                                flex: 1,
                                 child: Text(
                                   message!.text,
                                   maxLines: 1,
@@ -117,7 +118,6 @@ class ChatsScreen extends StatelessWidget {
                                     fontSize: 15.0,
                                   ),
                                 ),
-                                flex: 1,
                               ),
                               Padding(
                                 padding:

@@ -2,19 +2,18 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/network/local/cache_helper.dart';
-import 'package:social_app/shared/bloc/cubit.dart';
-import 'package:social_app/shared/constants/constants.dart';
-
-
-import '../../shared/components/components.dart';
-import '../../styles/colors.dart';
+import '../../Styles/colors.dart';
+import '../../core/components/components.dart';
+import '../../core/constants/constants.dart';
+import '../../core/controllers/bloc/cubit.dart';
+import '../../core/controllers/login_bloc/login_cubit.dart';
+import '../../core/controllers/login_bloc/login_states.dart';
 import '../../layout/home_layout.dart';
 import '../register/register_screen.dart';
-import 'login_bloc/login_cubit.dart';
-import 'login_bloc/login_states.dart';
+
 
 class LoginScreen extends StatelessWidget {
-  LoginScreen({Key? key}) : super(key: key);
+  LoginScreen({super.key});
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -31,7 +30,9 @@ class LoginScreen extends StatelessWidget {
               value: state.uId,
             ).then((value) {
               uId = state.uId;
-              SocialCubit.get(context).getUserData(userId: state.uId).then((value) {
+              SocialCubit.get(context)
+                  .getUserData(userId: state.uId)
+                  .then((value) {
                 SocialCubit.get(context).getPosts().then((value) {
                   navigateAndRemove(
                     context: context,
@@ -77,7 +78,7 @@ class LoginScreen extends StatelessWidget {
                           type: TextInputType.emailAddress,
                           controller: emailController,
                           label: 'Email Address',
-                          inputBorder: OutlineInputBorder(),
+                          inputBorder: const OutlineInputBorder(),
                           preficon: Icons.email_outlined,
                           validator: (String? value) {
                             if (value!.isEmpty) {
@@ -94,7 +95,7 @@ class LoginScreen extends StatelessWidget {
                           type: TextInputType.visiblePassword,
                           controller: passwordController,
                           label: 'Password',
-                          inputBorder: OutlineInputBorder(),
+                          inputBorder: const OutlineInputBorder(),
                           preficon: Icons.lock_outline,
                           isObsecure: SocialLoginCubit.get(context).isPassword,
                           sufficon: SocialLoginCubit.get(context).icon,
@@ -146,14 +147,15 @@ class LoginScreen extends StatelessWidget {
                           height: 20.0,
                         ),
                         const Align(
-                          child: Text('- OR -'),
                           alignment: AlignmentDirectional.center,
+                          child: Text('- OR -'),
                         ),
                         const SizedBox(
                           height: 15.0,
                         ),
                         Column(
                           children: [
+                            /*--------- sign in with google --------*/
                             Container(
                               width: double.infinity,
                               height: 40.0,
@@ -161,7 +163,7 @@ class LoginScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(6.0),
                               ),
                               child: OutlinedButton(
-                                child: Row(
+                                child: const Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     CircleAvatar(
@@ -169,7 +171,7 @@ class LoginScreen extends StatelessWidget {
                                       backgroundImage: AssetImage(
                                           'assets/images/google.jpg'),
                                     ),
-                                    const SizedBox(
+                                    SizedBox(
                                       width: 9.0,
                                     ),
                                     Text(
@@ -180,39 +182,29 @@ class LoginScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  SocialLoginCubit.get(context).signInWithGoogle();
+                                },
                               ),
                             ),
                             const SizedBox(
                               height: 10.0,
                             ),
+                            /*--------- sign in with facebook --------*/
                             Container(
                               width: double.infinity,
-                              height: 40.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(6.0),
-                              ),
-                              child: OutlinedButton(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    CircleAvatar(
-                                      radius: 14.0,
-                                      backgroundImage: AssetImage(
-                                          'assets/images/facebook logo.png'),
-                                    ),
-                                    const SizedBox(
-                                      width: 9.0,
-                                    ),
-                                    Text(
-                                      'Login With Facebook',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ],
+                                 height: 40.0,
+                                 decoration: BoxDecoration(
+                                 borderRadius: BorderRadius.circular(6.0),
                                 ),
-                                onPressed: () {},
+                              child: OutlinedButton.icon(
+                                onPressed: () {
+                                  SocialLoginCubit.get(context).signInWithFacebook();
+                                },
+                                icon: const Icon(Icons.facebook),
+                                label: const Text(
+                                  'Login With Facebook',
+                                ),
                               ),
                             ),
                           ],
@@ -230,7 +222,7 @@ class LoginScreen extends StatelessWidget {
                                   navigateTo(
                                       context: context,
                                       widget: RegisterScreen());
-                                })
+                                }),
                           ],
                         ),
                       ],

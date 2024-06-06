@@ -1,5 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-//shared preference (local database)
+//core preference (local database)
 class CacheHelper {
   static late SharedPreferences sharedPreferences;
 
@@ -45,12 +45,12 @@ class CacheHelper {
   static Future<bool> removeData({required String key}) async{
    return await sharedPreferences.remove(key);
   }
-  //check if the shared preferences contains a certain value(key) or not
+  //check if the core preferences contains a certain value(key) or not
   static bool checkData({required String key}){
     return  sharedPreferences.containsKey(key);
   }
 
-  //clear all data  (clear all the shared preferences)
+  //clear all data  (clear all the core preferences)
   static Future<bool> removeAllData() async{
     return await  sharedPreferences.clear();
   }

@@ -27,7 +27,7 @@ ThemeData darkTheme = ThemeData(
     ),
     prefixIconColor: Colors.white,
     fillColor: Colors.white,
-    border: OutlineInputBorder(
+    border: const OutlineInputBorder(
       borderSide: BorderSide(
         color: Colors.grey,
       ),
@@ -37,7 +37,7 @@ ThemeData darkTheme = ThemeData(
   scaffoldBackgroundColor: HexColor('333739'),
 
   textTheme:  TextTheme(
-    bodyMedium: TextStyle(
+    bodyMedium: const TextStyle(
       fontWeight: FontWeight.normal,
       fontSize: 18.0,
       color: Colors.white,
@@ -48,12 +48,12 @@ ThemeData darkTheme = ThemeData(
       fontSize: 17.0,
       color: Colors.grey[350],
     ),
-      bodySmall: TextStyle(
+      bodySmall: const TextStyle(
         fontWeight: FontWeight.normal,
         fontSize: 13.0,
         color: Colors.grey,
       ),
-    titleMedium: TextStyle(
+    titleMedium: const TextStyle(
      // height: 1.3,
       fontSize: 14.0,
       color: Colors.white,
@@ -103,7 +103,7 @@ ThemeData lightTheme =  ThemeData(
     color: Colors.grey[400],
   ),
   scaffoldBackgroundColor: Colors.white,
-  textTheme:  TextTheme(
+  textTheme:  const TextTheme(
     titleSmall: TextStyle(
       fontWeight: FontWeight.bold,
       fontSize: 17.0,
@@ -139,14 +139,14 @@ ThemeData lightTheme =  ThemeData(
     fontWeight: FontWeight.normal,
   ),
 
-  border: OutlineInputBorder(
+  border: const OutlineInputBorder(
     borderSide: BorderSide(
       color: Colors.grey,
     ),
   ),
 
 ),
-  appBarTheme:  AppBarTheme(
+  appBarTheme:  const AppBarTheme(
       titleSpacing: 16.0,
       titleTextStyle: TextStyle(
         fontFamily: "Jannah",

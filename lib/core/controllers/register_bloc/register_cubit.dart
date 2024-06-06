@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:social_app/core/controllers/register_bloc/register_states.dart';
 import 'package:social_app/models/user_model.dart';
-import 'package:social_app/pages/register/register_bloc/register_states.dart';
 
 
 class SocialRegisterCubit extends Cubit<SocialRegisterStates> {
@@ -38,6 +40,55 @@ class SocialRegisterCubit extends Cubit<SocialRegisterStates> {
     }).catchError((error){
       emit(SocialRegisterErrorState(error.toString()));
     });
+  }
+
+  // create account with google method
+  continueWithGoogle() async{
+    //start of sign in process
+    final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
+
+    //obtain auth details from request
+    final GoogleSignInAuthentication gAuth = await gUser!.authentication;
+
+    //create a new credential for user
+    final credential = GoogleAuthProvider.credential(
+      accessToken: gAuth.accessToken,
+      idToken: gAuth.idToken,
+    );
+
+    // finally, sign in
+    return  FirebaseAuth.instance.signInWithCredential(credential).then((value) {
+      userCreate(
+        name: value.user!.displayName!,
+        email: value.user!.email!,
+        phone: '+01255485646465',
+        usId: value.user!.uid,
+        isEmailVerified: false,
+      );
+    });
+  }
+
+  // create account with facebook method
+  continueInWithFacebook() async{
+    //start of sign in process
+    final FacebookLogin facebookLogin = FacebookLogin();
+    final FacebookLoginResult result = await facebookLogin.logIn(customPermissions: ['email']);
+    final accessToken = result.accessToken?.token;
+    //check login result
+    if(result.status == FacebookLoginStatus.success){
+      //create a new credential for user
+      final faceCredential = FacebookAuthProvider.credential(accessToken!);
+      // finally, sign in
+      FirebaseAuth.instance.signInWithCredential(faceCredential).then((value) {
+        userCreate(
+          name: value.user!.displayName!,
+          email: value.user!.email!,
+          phone: '+01255487746465',
+          usId: value.user!.uid,
+          isEmailVerified: false,
+        );
+      });
+    }
   }
 
  //create user (doc) in firebase firestore and save his data, this function called after register.
