@@ -1,11 +1,11 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:social_app/Styles/colors.dart';
 import 'package:social_app/pages/new_post/new_post_screen.dart';
 import '../../core/components/components.dart';
 import '../../core/controllers/bloc/cubit.dart';
 import '../../core/controllers/bloc/states.dart';
+import '../../core/styles/colors.dart';
 import '../../core/styles/icon_broken.dart';
 import '../edit_profile/edit_profile_screen.dart';
 import '../settings/settings_screen.dart';

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../../Styles/colors.dart';
 import '../../models/post_model.dart';
 import '../../pages/visit_profile/visit_profile_screen.dart';
 import '../controllers/bloc/cubit.dart';
 import '../controllers/visit_profile_cubit/visit_profile_cubit.dart';
+import '../styles/colors.dart';
 import '../styles/icon_broken.dart';
 
 void navigateTo({
@@ -253,7 +253,7 @@ Widget buildPostItem({
                       const SizedBox(
                         width: 2.0,
                       ),
-                      const Icon(
+                       const Icon(
                         Icons.check_circle,
                         color: defaultColor,
                         size: 16.0,

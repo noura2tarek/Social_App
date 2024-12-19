@@ -2,12 +2,12 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/network/local/cache_helper.dart';
-import '../../Styles/colors.dart';
 import '../../core/components/components.dart';
 import '../../core/constants/constants.dart';
 import '../../core/controllers/bloc/cubit.dart';
 import '../../core/controllers/login_bloc/login_cubit.dart';
 import '../../core/controllers/login_bloc/login_states.dart';
+import '../../core/styles/colors.dart';
 import '../../layout/home_layout.dart';
 import '../register/register_screen.dart';
 

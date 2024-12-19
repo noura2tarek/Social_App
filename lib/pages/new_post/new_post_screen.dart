@@ -1,10 +1,10 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:social_app/Styles/colors.dart';
 import '../../core/components/components.dart';
 import '../../core/controllers/bloc/cubit.dart';
 import '../../core/controllers/bloc/states.dart';
+import '../../core/styles/colors.dart';
 import '../../core/styles/icon_broken.dart';
 
 class NewPostScreen extends StatelessWidget {

@@ -95,7 +95,6 @@ class MyApp extends StatelessWidget {
 
   MyApp({super.key, required this.startWidget, required this.isDarkk});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
