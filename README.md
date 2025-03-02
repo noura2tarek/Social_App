@@ -86,7 +86,8 @@ And initialize firebase in main.dart file.
 - **Features**:
     - Edit profile feature.
     - Add photo/post feature.
-
+    - Change settings includes theme feature.
+      
 ### 8. Theme feature
 
 - Allow manually toggle between light and dark modes.
