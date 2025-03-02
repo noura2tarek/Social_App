@@ -67,6 +67,7 @@ class SettingsScreen extends StatelessWidget {
                                 ),
                               ),
                               const Spacer(),
+                              // Change Theme mode switch
                               Switch(
                                 activeColor: defaultColor,
                                 splashRadius: 6.0,

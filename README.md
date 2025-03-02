@@ -1,30 +1,83 @@
-# Soical App
+# Social App
 
 # General Description
 
-Flutter-based Movie Application shows different categories of Movies: now playing movies, popular
-movies and top-rated movies.
-organized and built using clean architecture and Design Patterns (Such as Singleton).
-Manages state using BLoC State Management (Flutter Bloc) and Dependency Injection using Get It.
+Flutter-based Social application 
 
-# Features
+# Connect App to Firebase
+Services used is Firebase auth, Cloud firestore, and Storage.
+The app manages authentication of users using firebase auth, and saves posts ans users data in firestore.
 
-- Shows different categories of Movies in Home Screen using the Movie Database API (TMDB).
-- Shows Movie Details including movie poster, title, overview, date, and reviews in Movie Details
-  Screen.
-- Shows Movies Recommendations list in Movie Details Screen.
-- Flexible Scrolling using Custom Scroll View.
-- Enhance user experience by adding animations and shimmer effect in the UI design.
+Project configuration with firebase:
+ - First, create a firebase project.
+ - Connect my app to firebase manually and add google-services.json file.
+ - Then, we add firebase core, firebase_auth, cloud_firestore, firebase_storage, firebase_messaging packages to the pubspec.yaml file.
+
+And initialize firebase in main.dart file.
+
+## Pages & Features
+### 1. Authentication
+
+- *Signup Page*:
+  - **Input fields**: Name, Email, Password, Confirm Password, Phone Number.
+  - Users are redirected to the Login Page after signup successfully.
+
+- *Login Page*:
+  - Input fields: Email, Password.
+  - **Validation**: Checks credentials using firebase auth.
+  - **Navigation**: Successful login redirects users to the **Home Page**.
+  - **Features**: Login using Google feature provided using firebase and google sign in package.
+
+### 2. Home Page
+- **Posts List View**: Displays scrollable List of cards vertically for showing posts of users which saved in firestore.
+  - Each post card includes:
+    - Image of the user's post.
+    - User Name.
+    - Date of the post.
+    - Post text.
+    - post image if exist.
+    - The number of likes, comments, and shares.
+
+### 3. Chats Page Feature
+- Displays a list of users which is any user saved   .
+- **Navigation**: Selecting a governorate navigates to a page showing landmarks specific to that governorate.
+
+### 4. Add Post Page
+### 5. Users Page
+
+### 6. Profile Page
+- Displays user details including:
+  - Full Name
+  - Email
+  - Address
+  - Phone number
+  - Password (hashed for security).
+
+### 7. Bottom Navigation Bar
+- Visible on main pages: **Home**, **Chats**, **Post**, **Users**, **Profile**.
+- Includes icons for easy navigation using custom icons 
+   
+
+### 8. Theme feature
+- Allow manually toggle between light and dark modes.
+- Using a switch in settings screen.
+- Handled using social bloc.
+
+### 9. Profile image Management
+- Apply changing profile image feature.
+- The user can change his image from Gallery or Camera.
+- Also, delete profile image option provided.
 
 ------------------------------------
 # State Management
 
-- The application uses **BLoC State Management** (Flutter Bloc) to manage the state of the application.
-- The controllers of the application are implemented in the presentation layer.
+- The application uses **BLoC/cubit State Management** (Flutter Bloc) to manage the state of the application.
+- The controllers of the application are implemented in the controllers folder.
 They are:  
-  - **Movies Bloc**.   
-  - **Movie Details Bloc**.     
-
+  - **Social Cubit**.   
+  - **Login Cubit**. 
+  - **Register Cubit**.
+  - **Visit Profile Cubit**.
 ---------------------------------
 # Files Architecture
 
@@ -43,19 +96,9 @@ mapping the use cases to the UI.
 
 -------------------------------------------
 
-# UI Design and animations
+# UI Design
 
-The application has a user-friendly UI with a clean design and animations.
-
-- **Custom Scrolling**: Implemented using custom scroll view to allow more flexibility in scrolling.
-- **Shimmer Loading Placeholder**: Using the shimmer package to display a sleek loading effect
-  while images load via **cached_network_image**, providing a smooth and polished UI during data
-  fetches.
-- **Fade-In and Fade-In-Up Animations**: Implemented using the animate_do package to enhance user
-  experience. lists feature smooth fade-in effects, while columns incorporate a fade-in-up animation
-  for dynamic content loading.
-
----------------------------------------
+The application has a user-friendly UI.
 
 # ScreenShots
 
@@ -74,25 +117,6 @@ Provides state management for implementing BLoC (Business Logic Component).
 - **Purpose**: Helps in managing and separating business logic from UI.
 - **Documentation**: [flutter_bloc Documentation](https://pub.dev/packages/flutter_bloc)
 
-## **dio**
-
-A powerful HTTP client for Dart, used for handling API requests.
-
-- **Purpose**: Makes it easier to send HTTP requests, handle responses, and manage network errors.
-- **Documentation**: [dio Documentation](https://pub.dev/packages/dio)
-
-## **equatable**
-
-- **Purpose**: Helps in comparing objects for equality based on their properties.
-- **Documentation**: [equatable Documentation](https://pub.dev/packages/equatable)
-
-## **get_it**
-
-A simple dependency injection library for Dart.
-
-- **Purpose**: Simplifies the management of dependencies in your application.
-- **Documentation**: [get_it Documentation](https://pub.dev/packages/get_it)
-
 ## **cached_network_image**
 
 - **Purpose**: Helps in efficiently loading and caching images from the network.
@@ -103,24 +127,6 @@ A simple dependency injection library for Dart.
 - **Purpose**: Helps in creating a slider for displaying a list of images.
 - **Documentation**: [carousel_slider Documentation](https://pub.dev/packages/carousel_slider)
 
-## **google_fonts**
 
-- **Purpose**: Helps in using custom fonts in your application.
-- **Documentation**: [google_fonts Documentation](https://pub.dev/packages/google_fonts)
-
-## **animate_do**
-
-- **Purpose**: Helps in adding animations to your application.
-- **Documentation**: [animate_do Documentation](https://pub.dev/packages/animate_do)
-
-## **shimmer**
-
-- **Purpose**: Helps in adding a shimmer effect to your application.
-- **Documentation**: [shimmer Documentation](https://pub.dev/packages/shimmer)
-
-## **dartz**
-
-- **Purpose**: Helps in creating a functional programming library for Dart and return Either values for error handling.
-- **Documentation**: [dartz Documentation](https://pub.dev/packages/dartz)
 
 --------------------------------------------

@@ -42,7 +42,8 @@ class SocialCubit extends Cubit<SocialStates> {
     'Profile',
   ];
 
-//use saved current index from constants
+  // use saved current index from constants
+  // Change bottom index method
   void changeBottomIndex(int index) {
     if (index == 2) {
       emit(SocialAddPostState());
