@@ -118,11 +118,11 @@ And initialize firebase in main.dart file.
 
 The architecture of the project is divided into the following folders:
 
-- core (components, controllers, constants, styles, and strings).
-- layout (home layout including bottom navigation bar).
-- models (user model, post model, message model).
-- network (local folder: to save data locally using shared preferences).
-- pages (login page, register page, home page, chats page, new post page, users page, profile page,
+- **core** (components, controllers, constants, styles, and strings).
+- **layout** (home layout including bottom navigation bar).
+- **models** (user model, post model, message model).
+- **network** (local folder: to save data locally using shared preferences).
+- **pages** (login page, register page, home page, chats page, new post page, users page, profile page,
   edit profile page, edit post page, settings page).
 
 -------------------------------------------
@@ -140,6 +140,26 @@ The application has a user-friendly UI.
 | Post Page                    | Profile Page                   |
 |------------------------------|--------------------------------|
 | ![Post](new-post-screen.png) | ![Profile](social-profile.png) |
+
+-------------------------------------------
+
+## Navigation Flow
+
+- *Signup Page* → *Login Page* → *Home Page*
+- *Login Page* → *Home Page*
+- *Home Page* → *chats Page* → *Chat details page*
+- *Home Page* → *New post Page* 
+- *Home Page* → *Users Page* 
+- *Home Page* → *Profile Page* → *Edit Profile Page*
+- *Home Page* → *Profile Page* → *Settings page*
+  
+---------------------------------------------
+
+## How to Run
+
+1. Clone the repository.
+2. Run `flutter pub get` to install dependencies.
+3. Run `flutter run` to start the app.
 
 -------------------------------------------
 
@@ -172,7 +192,7 @@ Provides state management for implementing BLoC (Business Logic Component).
 - **Purpose**: Helps in storing and retrieving data locally.
 - **Documentation**: [shared_preferences Documentation](https://pub.dev/packages/shared_preferences)
 
-## ** carousel_slider**
+## **carousel_slider**
 
 - **Purpose**: Helps in creating a slider for displaying a list of images.
 - **Documentation**: [carousel_slider Documentation](https://pub.dev/packages/carousel_slider)
@@ -226,4 +246,3 @@ Provides state management for implementing BLoC (Business Logic Component).
 
 - **Purpose**: Helps in sending and receiving push notifications using Firebase Messaging.
 - **Documentation**: [firebase_messaging Documentation](https://pub.dev/packages/firebase_messaging)
---------------------------------------------
