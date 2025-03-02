@@ -97,7 +97,7 @@ And initialize firebase in main.dart file.
 ### 9. Profile image Management
 
 - Apply changing profile image feature.
-- The user can change his image from Gallery or Camera.
+- The user can change his image by picking an image from the Gallery.
 
 ------------------------------------
 
