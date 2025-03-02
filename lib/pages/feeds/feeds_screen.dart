@@ -3,23 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/components/components.dart';
 import '../../core/controllers/bloc/cubit.dart';
-import '../../core/controllers/bloc/states.dart';
 import '../../core/styles/icon_broken.dart';
 
-
 class FeedsScreen extends StatelessWidget {
-  FeedsScreen({super.key});
+  const FeedsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SocialCubit, SocialStates>(
-      listener: (context, state) {
-        if(state is  SocialGetPostsSuccessState){}
-      },
+    return BlocBuilder(
       builder: (context, state) {
         var cubit = SocialCubit.get(context);
         var model = SocialCubit.get(context).userModel;
-        var posts =SocialCubit.get(context).posts;
+        var posts = SocialCubit.get(context).posts;
         return ConditionalBuilder(
           condition: posts.isNotEmpty,
           builder: (context) {
@@ -30,7 +25,8 @@ class FeedsScreen extends StatelessWidget {
                     Container(
                       height: 45.0,
                       padding: const EdgeInsetsDirectional.symmetric(
-                          horizontal: 15.0),
+                        horizontal: 15.0,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.amber.shade200,
                         //borderRadius: const BorderRadiusDirectional.all(Radius.circular(7.0)),
@@ -91,9 +87,7 @@ class FeedsScreen extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                       return buildPostItem(
-                          context: context,
-                          model: posts[index],
-                          index: index);
+                          context: context, model: posts[index], index: index);
                     },
                     separatorBuilder: (context, index) => const SizedBox(
                       height: 9.0,
@@ -107,19 +101,25 @@ class FeedsScreen extends StatelessWidget {
               ),
             );
           },
-          fallback: (context) =>  Center(
+          fallback: (context) => Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
                   Icons.menu,
-                  color: SocialCubit.get(context).isDark? Colors.grey[400]: Colors.black45,  //black 45 for light theme , grey[400] for dark
+                  color: SocialCubit.get(context).isDark
+                      ? Colors.grey[400]
+                      : Colors.black45,
+                  //black 45 for light theme , grey[400] for dark
                   size: 100.0,
                 ),
                 Text(
                   'No Posts Yet',
                   style: TextStyle(
-                    color: SocialCubit.get(context).isDark? Colors.grey[400]: Colors.black45, //change color here according to theme mode
+                    color: SocialCubit.get(context).isDark
+                        ? Colors.grey[400]
+                        : Colors.black45,
+                    //change color here according to theme mode
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
                   ),

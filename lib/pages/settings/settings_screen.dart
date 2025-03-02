@@ -85,7 +85,6 @@ class SettingsScreen extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(vertical: 8.0),
                               child: Row(
-                                // mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(
                                     Icons.language_outlined,
@@ -135,7 +134,6 @@ class SettingsScreen extends StatelessWidget {
                               Radius.circular(15.0)),
                         ),
                         child: Row(
-                          //mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
                               IconBroken.Logout,
@@ -152,7 +150,6 @@ class SettingsScreen extends StatelessWidget {
                                 color: SocialCubit.get(context).isDark
                                     ? Colors.grey[350]
                                     : Colors.black87,
-                                // cange color here according to theme mode
                                 fontSize: 15.0,
                               ),
                             ),

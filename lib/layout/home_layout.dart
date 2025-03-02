@@ -35,7 +35,7 @@ class HomeLayout extends StatelessWidget {
               ),
               IconButton(
                   onPressed: () {},
-                  icon: Icon(IconBroken.Search),
+                  icon: const Icon(IconBroken.Search),
               ),
             ],
           ),
