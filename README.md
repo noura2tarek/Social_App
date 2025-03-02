@@ -106,11 +106,11 @@ And initialize firebase in main.dart file.
 - The application uses **BLoC/cubit State Management** to manage the state of the
   application.
 - The controllers of the application are implemented in the controllers folder (in core folder).
-  They are:
-    - **Social Cubit**.
-    - **Login Cubit**.
-    - **Register Cubit**.
-    - **Visit Profile Cubit**.
+- They are:
+     - **Social Cubit**.
+     - **Login Cubit**.
+     - **Register Cubit**.
+     - **Visit Profile Cubit**.
 
 ---------------------------------
 
