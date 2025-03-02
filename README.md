@@ -32,13 +32,14 @@ And initialize firebase in main.dart file.
 
 - *Signup Page*:
     - **Input fields**: Name, Email, Password, Confirm Password, and Phone Number.
-    - Users are redirected to the Login Page after signup successfully.
+    - Users are redirected to the Home Page after signup successfully.
 
 - *Login Page*:
     - Input fields: Email, Password.
     - **Validation**: Checks credentials using firebase auth.
     - **Navigation**: Successful login redirects users to the **Home Page**.
     - **Features**: Login using Google feature provided using firebase and google sign in package.
+    - The user token saved locally after login.
 
 ### 2. Bottom Navigation Bar
 
