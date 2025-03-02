@@ -57,6 +57,8 @@ And initialize firebase in main.dart file.
         - Post text.
         - post image if exist.
         - The number of likes, comments, and shares.
+          
+  - **Features**: the user can like or unlike a post.
 
 ### 4. Chats Page Feature
 
